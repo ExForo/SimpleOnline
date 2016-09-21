@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="exile_styleonoff" title="Статус онлайн и оффлайн" version_string="1.0.0" version_id="100" url="https://xenforo.info/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+  <admin_navigation/>
+  <admin_permissions/>
+  <admin_style_properties/>
+  <admin_templates/>
+  <admin_template_modifications/>
+  <code_events/>
+  <code_event_listeners/>
+  <cron/>
+  <email_templates/>
+  <email_template_modifications/>
+  <optiongroups/>
+  <permissions>
+    <permission_groups/>
+    <permissions/>
+    <interface_groups/>
+  </permissions>
+  <phrases/>
+  <route_prefixes/>
+  <style_properties/>
+  <templates/>
+  <public_template_modifications>
+    <modification template="EXTRA.css" modification_key="exile_onoff_extra" description="Необходимые правки в EXTRA.CSS" execution_order="10" enabled="1" action="preg_replace">
+      <find><![CDATA[/^.*$/s]]></find>
+      <replace><![CDATA[$0
+.messageUserBlock div.avatarHolder .offlineMarker
+{
+  position: absolute;
+  background-color:rgb(181, 45, 45);
+  border-color:transparent;
+  -webkit-border-top-left-radius:4px;
+  -moz-border-radius-topleft:4px;
+  -khtml-border-top-left-radius:4px;border-top-left-radius:4px;
+  -webkit-border-top-right-radius:4px;
+  -moz-border-radius-topright:4px;
+  -khtml-border-top-right-radius:4px;
+  border-top-right-radius:4px;
+  left:0; top:0;
+  width:100%;
+  height:4px;
+}
+
+.xengallery_media_view .offlineMarker, .quickReply .offlineMarker {
+  display: none;
+}]]></replace>
+    </modification>
+    <modification template="message_user_info" modification_key="exile_onoff_mui" description="Необходимые правки в шаблоне" execution_order="10" enabled="1" action="str_replace">
+      <find><![CDATA[<xen:if is="{$user.isOnline}"><span class="Tooltip onlineMarker" title="{xen:phrase online_now}" data-offsetX="-22" data-offsetY="-8"></span></xen:if>]]></find>
+      <replace><![CDATA[<xen:if is="{$user.isOnline}">
+				<span class="Tooltip onlineMarker" title="{xen:phrase online_now}" data-offsetX="-22" data-offsetY="-8"></span>
+			<xen:else />
+				<span class="Tooltip offlineMarker" title="Offline" data-offsetX="-10" data-offsetY="-8"></span>
+			</xen:if>]]></replace>
+    </modification>
+    <modification template="message_user_info.css" modification_key="exile_onoff_muicss_1" description="Необходимые правки в .css #1" execution_order="10" enabled="1" action="str_replace">
+      <find><![CDATA[.messageUserBlock div.avatarHolder .onlineMarker
+			{
+				position: absolute;
+				top: {xen:calc '{xen:property messageAvatarHolder.padding-top} - 1'}px;
+				left: {xen:calc '{xen:property messageAvatarHolder.padding-right} - 1'}px;
+				
+				{xen:property messageOnlineMarker}
+			}]]></find>
+      <replace><![CDATA[.messageUserBlock div.avatarHolder .onlineMarker
+			{
+				position: absolute;
+				background-color:rgb(100, 163, 61);
+				border-color:transparent;
+				-webkit-border-top-left-radius:4px;
+				-moz-border-radius-topleft:4px;
+				-khtml-border-top-left-radius:4px;border-top-left-radius:4px;
+				-webkit-border-top-right-radius:4px;
+				-moz-border-radius-topright:4px;
+				-khtml-border-top-right-radius:4px;
+				border-top-right-radius:4px;
+				left:0; top:0;
+				width:100%;
+				height:4px;
+			}]]></replace>
+    </modification>
+    <modification template="message_user_info.css" modification_key="exile_onoff_muicss_2" description="Необходимые правки в .css #2" execution_order="10" enabled="1" action="str_replace">
+      <find><![CDATA[.Responsive .messageUserBlock div.avatarHolder .onlineMarker
+		{
+			top: 4px;
+			left: 4px;
+			border-width: 6px;
+		}]]></find>
+      <replace><![CDATA[.Responsive .messageUserBlock div.avatarHolder .onlineMarker
+		{
+			top: 4px;
+			border-width: 6px;
+		}]]></replace>
+    </modification>
+  </public_template_modifications>
+  <bb_code_media_sites/>
+  <bb_codes/>
+</addon>
